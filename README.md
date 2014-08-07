@@ -34,5 +34,5 @@ Dowload `UI5 Runtime` library: [UI5](http://sap.github.io/openui5/download.html/
 
 Save the `resource` folder to the path:
 ```
-<path to the ui5-boilerplate>\...
+<path to the ui5-boilerplate>/app/lib/
 ```
