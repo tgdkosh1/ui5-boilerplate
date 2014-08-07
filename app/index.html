@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html ng-app="sbapp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html ng-app="sbapp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html ng-app="sbapp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html ng-app="sbapp" class="no-js"> <!--<![endif]-->
+    <head lang="en">
+
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Sberbank</title>
+
+        <meta name="description" content="AngularJS App, Module based">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+        <!-- Bower Components -->
+        <!-- fileblock:css bowerCss -->
+        <!-- endfileblock -->
+
+        <!-- Application Stylesheets -->
+        <!-- fileblock:css styles -->
+        <link href="assets/css/normalize.css" rel="stylesheet" />
+        <link href="assets/css/crossBrowserStyling.css" rel="stylesheet" />
+        <link href="assets/css/ie8-fix.css" rel="stylesheet" />
+        <link href="assets/css/main.css" rel="stylesheet" />
+        <link href="assets/css/sbapp.css" rel="stylesheet" />
+        <link href="assets/css/tempy.css" rel="stylesheet" />
+        <!-- endfileblock -->
+
+
+        <!--[if lt IE 9]>
+        <script src="assets/js/modernizr.js"></script>
+        <script src="assets/js/respond.js"></script>
+        <![endif]-->
+
+    </head>
+    <body>
+
+        <!--[if lt IE 9]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/?locale=en">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="container">
+
+            <!-- Header -->
+            <header ui-view="header"></header>
+
+            <!-- Main Content -->
+            <main id="content" role="main" ui-view="main" ng-animate=" 'animate' "></main>
+
+        </div>
+
+        <!-- Footer -->
+        <footer ui-view="footer"></footer>
+
+
+        <!-- Bower Components -->
+        <!-- fileblock:js bowerJs -->
+        <script src="lib/jquery/dist/jquery.min.js"></script>
+        <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="lib/underscore/underscore.js"></script>
+        <script src="lib/angular/angular.js"></script>
+        <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+        <script src="lib/angular-translate/angular-translate.min.js"></script>
+        <script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+        <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="lib/angular-animate/angular-animate.min.js"></script>
+        <!-- endfileblock -->
+
+        <!-- Vendor Files -->
+        <!-- fileblock:js vendorJs -->
+        <script src="assets/js/html5shiv.js"></script>
+        <script src="assets/js/affix.js"></script>
+        <script src="assets/js/alert.js"></script>
+        <script src="assets/js/button.js"></script>
+        <script src="assets/js/carousel.js"></script>
+        <script src="assets/js/chosen.js"></script>
+        <script src="assets/js/collapse.js"></script>
+        <script src="assets/js/datepicker.js"></script>
+        <script src="assets/js/dropdown.js"></script>
+        <script src="assets/js/modal.js"></script>
+        <script src="assets/js/popover.js"></script>
+        <script src="assets/js/respond.js"></script>
+        <script src="assets/js/scrollspy.js"></script>
+        <script src="assets/js/tab.js"></script>
+        <script src="assets/js/tooltip.js"></script>
+        <script src="assets/js/transition.js"></script>
+        <!-- endfileblock -->
+
+        <!-- Application Files -->
+        <!-- fileblock:js app -->
+        <script src="src/app.js"></script>
+        <script src="src/routes.js"></script>
+        <script src="src/_examples/module.js"></script>
+        <script src="src/common/module.js"></script>
+        <script src="src/home/module.js"></script>
+        <script src="src/pay/swissDom/module.js"></script>
+        <script src="src/_examples/routes.js"></script>
+        <script src="src/home/routes.js"></script>
+        <script src="src/pay/swissDom/routes.js"></script>
+        <script src="src/_examples/form.js"></script>
+        <script src="src/common/directives/datepicker.directive.js"></script>
+        <script src="src/home/home.js"></script>
+        <script src="src/pay/swissDom/form.js"></script>
+        <!-- endfileblock -->
+
+
+    </body>
+</html>

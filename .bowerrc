@@ -1,0 +1,5 @@
+{
+    "proxy":"http://proxy.corproot.net:8079",
+    "https-proxy":"http://proxy.corproot.net:8079",
+    "strict-ssl": false
+}
