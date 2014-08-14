@@ -5,6 +5,10 @@ ui5-boilerplate
 
 ### Infrastructure
 
+Create `GitHub` Account: [GitHub](https://github.com/)
+
+Install `Google Chrome`: [Google Chrome](http://www.google.ch/intl/de/chrome/browser/)
+
 Install `git`: [Git](http://msysgit.github.io/)
 
 Install `nodeJS`: [nodeJS](http://nodejs.org/)
