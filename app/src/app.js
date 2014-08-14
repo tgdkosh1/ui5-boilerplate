@@ -10,9 +10,23 @@ sap.ui.localResources( "util" );
 jQuery.sap.require( "Application" );
 var oApp = new Application( {root: "content"} );
 
-// Get home view
-var oView = new sap.ui.jsview( 'view.home', 'view.home' );
+jQuery.sap.declare( 'Application' );
+jQuery.sap.require( 'sap.ui.app.Application' );
 
-// Place home view
-var root = this.getRoot();
-oView.placeAt( root );
+var oApp = new Application( {root: "content"} );
+
+sap.ui.app.Application.extend( 'Application', {
+    init: function(){
+
+        // Get home view
+        var oView = new sap.ui.jsview( 'view.home', 'view.home' );
+
+        // Place home view
+        var root = this.getRoot();
+        oView.placeAt( root );
+
+    },
+    main: function(){
+
+    }
+} );

@@ -18,7 +18,7 @@ module.exports = {
 //    tempDir     : '.tmp',
 //    generatedDir: '.tmp/generated',
 
-    ui5Dir: this.bowerDir + '/openui5-sdk',
+    ui5Dir: 'openui5-sdk',
 
     appFiles: {
 
@@ -40,7 +40,7 @@ module.exports = {
      */
     bowerFiles : {
         js : [
-
+            'underscore/underscore.js'
         ],
         map:[
         ],
