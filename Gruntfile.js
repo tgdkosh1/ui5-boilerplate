@@ -33,39 +33,6 @@ module.exports = function( grunt ){
         bower: grunt.file.readJSON( 'bower.json' ),
 
         /**
-         * The banner is the comment that is placed at the top of our compiled source files. It is first processed
-         * as a Grunt template, where the `<%=` pairs are evaluated based on this very configuration object.
-         */
-        meta: {
-            banner: '/**\n' +
-                ' * @appName    <%= pkg.name %>\n' +
-                ' * @version    <%= pkg.version %>\n' +
-                ' * @date       <%= grunt.template.today("yyyy-mm-dd") %>\n' +
-                ' * @copyright  <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
-                ' * Licensed    <%= pkg.license %>\n' +
-                ' */\n'
-        },
-
-//        /**
-//         *
-//         */
-//        watch: {
-//            dev: {
-//                files: [
-//                    'Grunt.config.js',
-//                    '<%= devDir %>/<%= appFiles.js %>',
-//                    '<%= devDir %>/<%= lessDir %>/**/*.less'
-//                ],
-//                tasks: [
-//                    'build'
-//                ],
-//                options: {
-//                    event: ['added', 'changed', 'deleted']
-//                }
-//            }
-//        },
-
-        /**
          * `jshint` defines the rules of our linter as well as which files we should check. This file, all javascript
          * sources, and all our unit tests are linted based on the policies listed in `options`. But we can also
          * specify exclusionary patterns by prefixing them with an exclamation point (!); this is useful when code comes
@@ -89,14 +56,8 @@ module.exports = function( grunt ){
          * The 'clean' tasks cleans the mention directories
          */
         clean: {
-            temp: {
-                src: ['<%= tempDir %>/**/*', '<%= tempDir %>']
-            },
-            build: {
-                src: ['<%= buildDir %>/**/*']
-            },
-            deploy: {
-                src: ['<%= deployDir %>/**/*', '<%= deployDir %>']
+            lib: {
+                src: [ '<%= devDir %>/<%= libDir %>/**/*' ]
             }
         },
 
@@ -105,228 +66,25 @@ module.exports = function( grunt ){
          * (images, fonts, etc.) and javascripts into `buildDir`, and then to copy the assets to `deployDir`.
          */
         copy: {
-            buildIndex: {
+            openui5: {
                 files: [
-                    {
-                        src: '<%= devDir %>/<%= appFiles.index %>',
-                        dest: '<%= buildDir %>/<%= appFiles.index %>'
-                    }
-                ]
-            },
-            buildVendors: {
-                files: [
-                    {
-                        src: [ '**/*.js' ],
-                        cwd: '<%= devDir %>/<%= vendorDir %>',
-                        dest: '<%= generatedDir %>/<%= vendorDir %>/',
-                        expand: true
-                    }
-                ]
-            },
-            buildAssets: {
-                files: [
-                    {
-                        src: [ '**/*.css' ],
-                        cwd: '<%= devDir %>/<%= cssDir %>',
-                        dest: '<%= buildDir %>/<%= cssDir %>/',
-                        expand: true
-                    },
                     {
                         src: [ '**' ],
-                        cwd: '<%= devDir %>/<%= mediaDir %>',
-                        dest: '<%= buildDir %>/<%= mediaDir %>/',
-                        expand: true
-                    },
-                    {
-                        src: [ '**' ],
-                        cwd: '<%= devDir %>/<%= fontDir %>',
-                        dest: '<%= buildDir %>/<%= fontDir %>/',
-                        expand: true
-                    },
-                    {
-                        src: [ '**/*.js' ],
-                        cwd: '<%= devDir %>/<%= vendorDir %>',
-                        dest: '<%= buildDir %>/<%= vendorDir %>/',
-                        expand: true
-                    },
-                    {
-                        src: [ '**/*.json' ],
-                        cwd: '<%= devDir %>/<%= i18nDir %>',
-                        dest: '<%= buildDir %>/<%= i18nDir %>/',
+                        cwd: '<%= bowerDir %>/<%= ui5Dir %>/resources',
+                        dest: '<%= devDir %>/<%= libDir %>/<%= ui5Dir %>/resources',
                         expand: true
                     }
                 ]
             },
-            buildApp: {
-                files: [
-                    {
-                        src: [ '**/*.js', '**/*.tpl.html' ],
-                        cwd: '<%= devDir %>/<%= srcDir %>',
-                        dest: '<%= buildDir %>/<%= srcDir %>/',
-                        expand: true
-                    }
-                ]
-            },
-            buildLib: {
+            bowerToLib: {
                 files: [
                     {
                         src: '<%= bowerFiles.js %>',
-                        cwd: '<%= devDir %>/lib',
-                        dest: '<%= buildDir %>/lib/',
-                        expand: true
-                    },
-                    {
-                        src: '<%= bowerFiles.css %>',
-                        cwd: '<%= devDir %>/<%= libDir %>',
-                        dest: '<%= buildDir %>/<%= libDir %>/',
-                        expand: true
-                    },
-                    {
-                        src: '<%= bowerFiles.map %>',
-                        cwd: '<%= devDir %>/<%= libDir %>',
-                        dest: '<%= buildDir %>/<%= libDir %>/',
+                        cwd: '<%= bowerDir %>',
+                        dest: '<%= devDir %>/<%= libDir %>/',
                         expand: true
                     }
                 ]
-            },
-            deployIndex: {
-                files: [
-                    {
-                        src: '<%= devDir %>/<%= appFiles.index %>',
-                        dest: '<%= deployDir %>/<%= appFiles.index %>'
-                    }
-                ]
-            },
-            deployAssets: {
-                files: [
-                    {
-                        src: [ '**' ],
-                        cwd: '<%= devDir %>/<%= mediaDir %>',
-                        dest: '<%= deployDir %>/<%= mediaDir %>/',
-                        expand: true
-                    },
-                    {
-                        src: [ '**' ],
-                        cwd: '<%= devDir %>/<%= fontDir %>',
-                        dest: '<%= deployDir %>/<%= fontDir %>/',
-                        expand: true
-                    },
-                    //{
-                    //    src: [ '**/*.js' ],
-                    //    cwd: '<%= devDir %>/<%= vendorDir %>',
-                    //    dest: '<%= deployDir %>/<%= vendorDir %>/',
-                    //    expand: true
-                    //},
-                    {
-                        src: [ '**/*.json' ],
-                        cwd: '<%= devDir %>/<%= i18nDir %>',
-                        dest: '<%= deployDir %>/<%= i18nDir %>/',
-                        expand: true
-                    }
-                ]
-            },
-            deployLib: {
-                files: [
-                    {
-                        src: '<%= bowerFiles.js %>',
-                        cwd: '<%= devDir %>/<%= libDir %>',
-                        dest: '<%= deployDir %>/<%= libDir %>/',
-                        expand: true
-                    },
-                    {
-                        src: '<%= bowerFiles.css %>',
-                        cwd: '<%= devDir %>/<%= libDir %>',
-                        dest: '<%= deployDir %>/<%= libDir %>/',
-                        expand: true
-                    },
-                    {
-                        src: '<%= bowerFiles.map %>',
-                        cwd: '<%= devDir %>/<%= libDir %>',
-                        dest: '<%= deployDir %>/<%= libDir %>/',
-                        expand: true
-                    }
-                ]
-            },
-            deployTpl: {
-                files: [
-                    {
-                        src: [ '**/*.tpl.html' ],
-                        cwd: '<%= devDir %>/<%= srcDir %>',
-                        dest: '<%= deployDir %>/<%= srcDir %>/',
-                        expand: true
-                    }
-                ]
-            }
-
-        },
-
-        /**
-         * The 'fileblocks' tasks adds our files to the index file.
-         */
-        fileblocks: {
-            dev: {
-                options: {
-                    rebuild: true
-                },
-                src: '<%= devDir %>/<%= appFiles.index %>',
-                blocks: {
-                    'styles': {
-                        src: [
-                            '<%= cssDir %>/normalize.css',
-                            '<%= cssDir %>/crossBrowserStyling.css',
-                            '<%= appFiles.css %>'
-                        ],
-                        cwd: '<%= devDir %>'
-                    },
-                    'app': {
-                        src: [
-                            '<%= srcDir %>/app.js',
-                            '<%= srcDir %>/*.js',
-                            '<%= srcDir %>/**/module.js',
-                            '<%= srcDir %>/**/routes.js',
-                            '<%= appFiles.js %>'
-                        ],
-                        cwd: '<%= devDir %>'
-                    },
-
-                    'bowerCss': { src: '<%= bowerFiles.css %>', cwd: '<%= devDir %>/<%= libDir %>', prefix: '<%= libDir %>'  },
-                    'bowerJs': { src: '<%= bowerFiles.js %>', cwd: '<%= devDir %>/<%= libDir %>', prefix: '<%= libDir %>' },
-                    'vendorJs': { src: '<%= vendorFiles.js %>', cwd: '<%= devDir %>/<%= vendorDir %>', prefix: '<%= vendorDir %>'  }
-
-                }
-            },
-            build: {
-                options: {
-                    rebuild: true,
-                    removeAnchors: true
-                },
-                src: '<%= buildDir %>/<%= appFiles.index %>',
-                blocks: {
-                    'styles': { src: '<%= appFiles.css %>', cwd: '<%= buildDir %>' },
-                    'app': { src: '<%= appFiles.js %>', cwd: '<%= buildDir %>' },
-
-                    'bowerCss': { src: '<%= bowerFiles.css %>', cwd: '<%= buildDir %>/<%= libDir %>', prefix: '<%= libDir %>'  },
-                    'bowerJs': { src: '<%= bowerFiles.js %>', cwd: '<%= buildDir %>/<%= libDir %>', prefix: '<%= libDir %>' },
-                    'vendorJs': { src: '<%= vendorFiles.js %>', cwd: '<%= buildDir %>/<%= vendorDir %>', prefix: '<%= vendorDir %>'  }
-
-                }
-
-            },
-            deploy: {
-                options: {
-                    rebuild: true,
-                    removeAnchors: true
-                },
-                src: '<%= deployDir %>/<%= appFiles.index %>',
-                blocks: {
-                    'styles': { src: '<%= appFiles.css %>', cwd: '<%= deployDir %>' },
-                    'app': { src: '<%= appFiles.js %>', cwd: '<%= deployDir %>' },
-
-                    'bowerCss': { src: '<%= bowerFiles.css %>', cwd: '<%= deployDir %>/<%= libDir %>', prefix: '<%= libDir %>'  },
-                    'bowerJs': { src: '<%= bowerFiles.js %>', cwd: '<%= deployDir %>/<%= libDir %>', prefix: '<%= libDir %>' },
-                    'vendorJs': { src: '**/*.js', cwd: '<%= deployDir %>/<%= vendorDir %>', prefix: '<%= vendorDir %>'  }
-
-                }
             }
         }
 
@@ -343,28 +101,10 @@ module.exports = function( grunt ){
 
     grunt.registerTask( 'build', [
         'jshint:all',
-        'fileblocks:dev',
-        'clean:bower',
-        'copy:bower'
+        'clean:lib',
+        'copy:bowerToLib',
+        'copy:openui5'
     ] );
-
-
-
-//    /**
-//     * This task generate the full path for the vendor js files, because the concat task needs this.
-//     */
-//    grunt.registerTask( 'genFullPathForVendors', 'Generates the full path for the vendor js files', function(){
-//
-//        var vendorFiles = grunt.config.get( ['vendorFiles'] ).js;
-//        var array = [];
-//
-//        for( var index=0; index<vendorFiles.length; index++ ){
-//            array.push( 'app/assets/js/' + vendorFiles[index] );
-//        }
-//
-//        grunt.config.set( 'tmp.vendorFilesJs', array );
-//
-//    } );
 
 
 };
