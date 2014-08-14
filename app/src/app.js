@@ -9,3 +9,10 @@ sap.ui.localResources( "util" );
 // Launch application
 jQuery.sap.require( "Application" );
 var oApp = new Application( {root: "content"} );
+
+// Get home view
+var oView = new sap.ui.jsview( 'view.home', 'view.home' );
+
+// Place home view
+var root = this.getRoot();
+oView.placeAt( root );
