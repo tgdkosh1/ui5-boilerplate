@@ -46,38 +46,24 @@ module.exports = function( grunt ){
                 ' */\n'
         },
 
-        /**
-         * Settings for unit and e2e test with karma
-         */
-        karma: {
-            unit: {
-                configFile: '<%= testDir %>/karma.unit.config.js',
-                singleRun: true
-            },
-            e2e: {
-                configFile: '<%= testDir %>/karma.e2e.config.js',
-                singleRun: true
-            }
-        },
-
-        /**
-         *
-         */
-        watch: {
-            dev: {
-                files: [
-                    'Grunt.config.js',
-                    '<%= devDir %>/<%= appFiles.js %>',
-                    '<%= devDir %>/<%= lessDir %>/**/*.less'
-                ],
-                tasks: [
-                    'build'
-                ],
-                options: {
-                    event: ['added', 'changed', 'deleted']
-                }
-            }
-        },
+//        /**
+//         *
+//         */
+//        watch: {
+//            dev: {
+//                files: [
+//                    'Grunt.config.js',
+//                    '<%= devDir %>/<%= appFiles.js %>',
+//                    '<%= devDir %>/<%= lessDir %>/**/*.less'
+//                ],
+//                tasks: [
+//                    'build'
+//                ],
+//                options: {
+//                    event: ['added', 'changed', 'deleted']
+//                }
+//            }
+//        },
 
         /**
          * `jshint` defines the rules of our linter as well as which files we should check. This file, all javascript
@@ -96,12 +82,6 @@ module.exports = function( grunt ){
                     'Gruntfile.js',
                     '<%= devDir %>/<%= appFiles.js =>'
                 ]
-            },
-            test: {
-                options: {
-                    jshintrc: '<%= testDir %>/.jshintrc'
-                },
-                src: ['<%= testDir %>/<%= appFiles.spec =>']
             }
         },
 
@@ -281,103 +261,6 @@ module.exports = function( grunt ){
         },
 
         /**
-         *
-         */
-        less: {
-            dev: {
-                files: {
-                    '<%= devDir %>/<%= cssDir %>/<%= appName %>.css': '<%= devDir %>/<%= appFiles.less %>'
-                }
-            }
-        },
-
-        /**
-         * The 'cssmin' task combines, minifies and adds a banner to our stylesheets
-         */
-        cssmin: {
-            deploy: {
-                options: {
-                    banner: '<%= meta.banner %>'
-                },
-                files: {
-                    '<%= deployDir %>/<%= cssDir %>/<%= appName %>.min.css': [ '<%= devDir %>/<%= appFiles.css %>' ]
-                }
-            }
-        },
-
-        /**
-         *
-         */
-        concat: {
-            deploy: {
-                src: [
-                    '<%= devDir %>/<%= srcDir %>/app.js',
-                    '<%= devDir %>/<%= srcDir %>/*.js',
-                    '<%= devDir %>/<%= srcDir %>/**/module.js',
-                    '<%= devDir %>/<%= srcDir %>/**/routes.js',
-                    '<%= devDir %>/<%= appFiles.js %>'
-                ],
-                dest: '<%= generatedDir %>/<%= appName %>.js'
-            },
-            vendors: {
-                //cwd: '<%= devDir %>/<%= vendorDir %>',
-                src: '<%= tmp.vendorFilesJs %>',
-                dest: '<%= generatedDir %>/vendors.js'
-            }
-        },
-
-        /**
-         * ngmin tries to make the code safe for minification automatically by
-         * using the Angular long form for dependency injection. It doesn't work on
-         * things like resolve or inject so those have to be done manually.
-         */
-        ngmin: {
-            deploy: {
-                src: ['<%= generatedDir %>/<%= appName %>.js'],
-                dest: '<%= generatedDir %>/<%= appName %>.js'
-            }
-        },
-
-        /**
-         * The 'uglify' tasks also like the cssmin combines, minifies and adds a banner to our javascript files. We also
-         * generat a debug file with the 'beautify' option.
-         */
-        uglify: {
-            options: {
-                banner: '<%= meta.banner %>'
-            },
-            deployDebug: {
-                options: {
-                    beautify: true,
-                    mangle: false
-                },
-                files: {
-                    '<%= deployDir %>/<%= srcDir %>/<%= appName %>.debug.js': [ '<%= generatedDir %>/<%= appName %>.js' ]
-                }
-            },
-            deployMin: {
-                options: {
-                    mangle: {
-                        except: ['jQuery', 'Angular', 'angular', '$']
-                    }
-                },
-                files: {
-                    '<%= deployDir %>/<%= srcDir %>/<%= appName %>.min.js': [ '<%= generatedDir %>/<%= appName %>.js' ]
-                }
-            },
-            deployVendors: {
-                options: {
-                    mangle: {
-                        except: ['jQuery', 'Angular', 'angular', '$']
-                    }
-                },
-                files: {
-                    '<%= deployDir %>/<%= vendorDir %>/vendors.min.js': [ '<%= generatedDir %>/vendors.js' ]
-                }
-            }
-        },
-
-        /**
          * The 'fileblocks' tasks adds our files to the index file.
          */
         fileblocks: {
@@ -445,25 +328,6 @@ module.exports = function( grunt ){
 
                 }
             }
-        },
-
-        /**
-         * The 'bump' task
-         */
-        bump: {
-            options: {
-                files: ['package.json', 'bower.json'],
-                updateConfigs: [ 'pkg' ],
-                commit: false,
-                //commitMessage: 'Release v%VERSION%',
-                //commitFiles: ['package.json'],
-                createTag: false,
-                tagName: '%VERSION%',
-                tagMessage: 'Version %VERSION%',
-                push: false
-                //pushTo: 'upstream',
-                //gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d'
-            }
         }
 
 
@@ -474,98 +338,33 @@ module.exports = function( grunt ){
      * Build tasks for building the dev environment
      */
     grunt.registerTask( 'default', [
-        'watch_dev'
+        'build'
     ] );
 
     grunt.registerTask( 'build', [
         'jshint:all',
-        'less:dev',
-        'fileblocks:dev'
-    ] );
-
-    /**
-     * This tasks are for the testing stuff with karma and jasmine
-     */
-    grunt.registerTask( 'check', [
-        'jshint:all',
-        'jshint:test'
-    ] );
-
-    grunt.registerTask( 'test', [
-        'jshint:test',
-        'karma:unit',
-        'karma:e2e'
-    ] );
-
-    grunt.registerTask( 'test:unit', [
-        'jshint:test',
-        'karma:unit'
-    ] );
-
-    grunt.registerTask( 'test:e2e', [
-        'jshint:test',
-        'karma:e2e'
-    ] );
-
-    /**
-     * The following tasks are for the deployments
-     */
-    grunt.registerTask( 'dev', [
-        'clean:temp',
-        'clean:build',
-        'build',
-
-        'copy:buildAssets',
-        'copy:buildIndex',
-        'copy:buildApp',
-        'copy:buildLib',
-
-        'fileblocks:build',
-        'clean:temp'
-    ] );
-
-    grunt.registerTask( 'prod', [
-        'clean:temp',
-        'clean:deploy',
-        'build',
-
-        'copy:deployAssets',
-        'copy:deployLib',
-        'copy:deployTpl',
-        'copy:deployIndex',
-
-        'cssmin:deploy',
-
-        'genFullPathForVendors',
-        'concat:vendors',
-        'uglify:deployVendors',
-
-        'concat:deploy',
-        'ngmin:deploy',
-
-        'uglify:deployDebug',
-        'uglify:deployMin',
-
-        'fileblocks:deploy',
-        'clean:temp'
+        'fileblocks:dev',
+        'clean:bower',
+        'copy:bower'
     ] );
 
 
-    /**
-     * This task generate the full path for the vendor js files, because the concat task needs this.
-     */
-    grunt.registerTask( 'genFullPathForVendors', 'Generates the full path for the vendor js files', function(){
 
-        var vendorFiles = grunt.config.get( ['vendorFiles'] ).js;
-        var array = [];
-
-        for( var index=0; index<vendorFiles.length; index++ ){
-            array.push( 'app/assets/js/' + vendorFiles[index] );
-        }
-
-        grunt.config.set( 'tmp.vendorFilesJs', array );
-
-    } );
+//    /**
+//     * This task generate the full path for the vendor js files, because the concat task needs this.
+//     */
+//    grunt.registerTask( 'genFullPathForVendors', 'Generates the full path for the vendor js files', function(){
+//
+//        var vendorFiles = grunt.config.get( ['vendorFiles'] ).js;
+//        var array = [];
+//
+//        for( var index=0; index<vendorFiles.length; index++ ){
+//            array.push( 'app/assets/js/' + vendorFiles[index] );
+//        }
+//
+//        grunt.config.set( 'tmp.vendorFilesJs', array );
+//
+//    } );
 
 
 };

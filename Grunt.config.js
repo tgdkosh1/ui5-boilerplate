@@ -12,13 +12,13 @@ module.exports = {
     libDir   : 'lib',
     vendorDir: 'assets/js',
     cssDir   : 'assets/css',
-    lessDir  : 'assets/less',
-    fontDir  : 'assets/fonts',
-    mediaDir : 'assets/media',
+    imagesDir : 'assets/images',
     i18nDir  : 'assets/i18n',
 
-    tempDir     : '.tmp',
-    generatedDir: '.tmp/generated',
+//    tempDir     : '.tmp',
+//    generatedDir: '.tmp/generated',
+
+    ui5Dir: this.bowerDir + '/openui5-sdk',
 
     appFiles: {
 
@@ -40,6 +40,7 @@ module.exports = {
      */
     bowerFiles : {
         js : [
+
         ],
         map:[
         ],
