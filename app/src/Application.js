@@ -6,6 +6,8 @@
 sap.ui.localResources( "view" );
 sap.ui.localResources( "util" );
 
+jQuery.sap.registerModulePath( 'Application', 'Application' );
+
 // Launch application
 jQuery.sap.require( "Application" );
 var oApp = new Application( {root: "content"} );
