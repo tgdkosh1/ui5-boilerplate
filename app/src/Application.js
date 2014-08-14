@@ -1,35 +1,32 @@
 /**
- * Define your local resources here
+ * Created by tzhhige1 on 14/08/14.
  */
-sap.ui.localResources( 'src/view' );
-jQuery.sap.registerModulePath( 'view', 'src/view' );
 
-sap.ui.localResources( 'src/util' );
-jQuery.sap.registerModulePath( 'util', 'src/util' );
 
-/**
- * Application
- *
- * At runtime the first code to be executed is the "Application.js". The "init" function is executed
- * right away and can trigger tasks that can be executed without having the DOM available,
- * e.g. loading JSON files from the server. The "main" function is only called after the DOM is ready.
- * This is the point in time when you instantiate the app view and controller and place the view in the DOM.
- *
- */
+sap.ui.localResources( "view" );
+sap.ui.localResources( "util" );
+
+jQuery.sap.registerModulePath( 'Application', 'Application' );
+
+// Launch application
+jQuery.sap.require( "Application" );
+var oApp = new Application( {root: "content"} );
+
 jQuery.sap.declare( 'Application' );
 jQuery.sap.require( 'sap.ui.app.Application' );
 
 sap.ui.app.Application.extend( 'Application', {
     init: function(){
 
+        // Get home view
+        var oView = new sap.ui.jsview( 'view.home', 'view.home' );
 
+        // Place home view
+        var root = this.getRoot();
+        oView.placeAt( root );
 
     },
     main: function(){
-        var oRoot = this.getRoot();
-        var oView = new sap.ui.jsview( 'view.home', 'view.home' );
-        oView.placeAt( oRoot );
+
     }
 } );
-
-var oApp = new Application( { root: 'content' } );
