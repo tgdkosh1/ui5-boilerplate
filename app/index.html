@@ -11,36 +11,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-        <!-- Bower Components -->
-        <!-- fileblock:css bowerCss -->
-        <!-- endfileblock -->
-
-        <!-- Application Stylesheets -->
-        <!-- fileblock:css styles -->
-        <!-- endfileblock -->
-
-
-    </head>
-    <body>
-
-        <!--[if lt IE 9]>
-        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/?locale=en">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-
-
-
-        <div class="content"></div>
-
-
-
-        <!-- Bower Components -->
-        <!-- fileblock:js bowerJs -->
-        <!-- endfileblock -->
-
-        <!-- Vendor Files -->
-        <!-- fileblock:js vendorJs -->
-        <!-- endfileblock -->
-
 
         <!-- ui5Core:js -->
         <script id='sap-ui-bootstrap' type='text/javascript'
@@ -50,7 +20,21 @@
         </script>
         <!-- endui5Core -->
 
-        <script src="src/app.js"></script>
+        <script src="src/Application.js"></script>
+
+
+    </head>
+    <body class='sapUiBody'>
+
+        <!--[if lt IE 9]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/?locale=en">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+
+        <div id="content"></div>
+
+
 
     </body>
 </html>

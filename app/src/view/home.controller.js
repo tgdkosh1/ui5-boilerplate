@@ -23,11 +23,6 @@ sap.ui.controller( 'view.home', {
      * This hook is the same one that SAPUI5 controls get after being rendered.
      */
     onAfterRendering: function(){
-        // Page Title
-        $( 'header' ).find( 'h2.title' ).html(
-            sap.ui.getCore().getModel( 'i18n' ).getResourceBundle().getText( 'DASHBOARD_TITEL' )
-        );
-
     },
 
     /**

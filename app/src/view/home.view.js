@@ -7,7 +7,7 @@
 sap.ui.jsview( 'view.home', {
 
     getControllerName: function(){
-        return "view.home";
+        return 'view.home';
     },
 
     /**
@@ -18,7 +18,7 @@ sap.ui.jsview( 'view.home', {
         // Create simple text view
         var oTextView = new sap.ui.commons.TextView();
 
-        oTextView.setText("Hello world");
+        oTextView.setText( 'Hello world' );
 
         return oTextView;
     }
