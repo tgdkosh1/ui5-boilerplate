@@ -11,6 +11,9 @@ Install `Google Chrome`: [Google Chrome](http://www.google.ch/intl/de/chrome/bro
 
 Install `git`: [Git](http://msysgit.github.io/)
 
+* Important: Set the option `Run Git form the Windows Command Prompt`
+![Git installation settings](http://f.cl.ly/items/2V2O3i1p3R2F1r2v0a12/mysgit.png)
+
 Install `nodeJS`: [nodeJS](http://nodejs.org/)
 
 Install `bower`:
